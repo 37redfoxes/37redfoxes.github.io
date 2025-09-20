@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>37th Loudoun Red Foxes - Outdoor Service Guides Troop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, #2d5016 0%, #4a7c23 100%);
+            color: white;
+            padding: 1rem 0;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-bottom: 3px solid #dc2626;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0;
+            line-height: 1.2;
+        }
+
+        .logo p {
+            font-size: 1rem;
+            opacity: 0.9;
+            text-align: right;
+            margin-top: -0.2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%234a7c23" width="1200" height="600"/><circle fill="%23ffffff" opacity="0.1" cx="300" cy="150" r="80"/><circle fill="%23ffffff" opacity="0.1" cx="900" cy="400" r="120"/></svg>');
+            background-size: cover;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin: -2rem -1rem 2rem -1rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        /* About Section */
+        .about-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            color: #2d5016;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            margin-bottom: 2rem;
+        }
+
+        .scout-logo {
+            width: 200px;
+            height: 150px;
+            background: transparent;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        /* Info Cards */
+        .info-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .info-card {
+            background: white;
+            border: 2px solid #4a7c23;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .info-card h4 {
+            color: #2d5016;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-card ul {
+            list-style-position: inside;
+            color: #555;
+        }
+
+        .info-card li {
+            margin-bottom: 0.5rem;
+        }
+
+        .osg-section .about-text h3 {
+            color: #2d5016;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .osg-section .scout-logo {
+            width: 150px;
+            height: 150px;
+            background: transparent;
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* Age Groups Grid */
+        .age-groups-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .age-group {
+            background: white;
+            border: 2px solid #4a7c23;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .age-group-badge {
+            width: 120px;
+            height: 120px;
+            background: transparent;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin: 0 auto 1rem;
+        }
+
+        .age-group h4 {
+            color: #2d5016;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .age-group-resource {
+            margin-top: 1rem;
+            font-weight: bold;
+            color: #4a7c23;
+        }
+
+        .age-group-resource a {
+            color: #4a7c23;
+            text-decoration: underline;
+        }
+
+        .age-group-resource a:hover {
+            color: #2d5016;
+            text-decoration: none;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: white;
+            border: 2px solid #4a7c23;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .contact-section h3 {
+            color: #2d5016;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-note {
+            background: #f9f9f9;
+            padding: 1rem;
+            border-left: 4px solid #4a7c23;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .contact-note strong {
+            color: #2d5016;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2d5016;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                left: auto;
+                background: #2d5016;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                min-width: 200px;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+
+            .logo p {
+                font-size: 0.9rem;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .about-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .osg-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .info-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .age-groups-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1rem 0.5rem;
+            }
+
+            .hero {
+                padding: 2rem 0;
+                margin: -1rem -0.5rem 1rem -0.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+
+            .info-card, .age-group, .contact-section {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>37th Loudoun Red Foxes</h1>
+                <p>Outdoor Service Guides troop</p>
+            </div>
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#" onclick="showPage('about')" class="nav-link active">About Us</a></li>
+                    <li><a href="#" onclick="showPage('age-groups')" class="nav-link">Age Groups</a></li>
+                    <li><a href="#" onclick="showPage('contact')" class="nav-link">Contact Us</a></li>
+                </ul>
+                <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- About Us Page -->
+        <div id="about" class="page active">
+            <section class="hero">
+                <div class="hero-content">
+                    <h2>Welcome to Our Troop</h2>
+                    <p>Building character, leadership, and outdoor skills through adventure and service to our community.</p>
+                </div>
+            </section>
+
+            <section class="about-section">
+                <div class="scout-logo">
+                    <img src="37thlogo.gif" alt="37th Loudoun Red Foxes Logo" style="width: 300px; height: auto;">
+                </div>
+                <div class="about-text">
+                    <h3>About Us</h3>
+                    <p>The 37th Loudoun Red Foxes is Outdoor Service Guide's troop serving Loudoun County, VA and surrounding areas. All adults and youth - regardless of age, gender, class, or other variables - are welcome to join us. We are outdoor-focused and believe in inclusion, volunteerism, self-reliance, independence, confidence, leading by uplifting others, and service to the community.</p>
+                </div>
+            </section>
+
+            <div class="info-cards">
+                <div class="info-card">
+                    <h4>What do we do in our meetups?</h4>
+                    <p>We participate in educational group adventures, campouts, hikes, and community-building projects that take advantage of being outdoors, whenever and wherever possible. Activities like fishing, star gazing, orienteering, survival skills, bird watching, volunteering at a food drive, river clean up, park clean up, visiting the fire station, zoo, water facility. Scouts will mostly complete badges at home, since it is not the main focus of our meetups.</p>
+                </div>
+
+                <div class="info-card">
+                    <h4>When and Where do we meet?</h4>
+                    <p>At the beginning of each scouting year, we will have a tentative calendar posted with all our campouts, hikes and meetups. Other events may be added throughout the year. We meet outdoors, whenever possible, across Northern VA and surrounding areas in parks, hiking spots, lakes and other outdoor venues. We may cancel a meetup due to extreme weather. Few winter meetings may be indoors.</p>
+                </div>
+
+                <div class="info-card">
+                    <h4>How are parents involved?</h4>
+                    <p>Badge work is mostly completed at home and parents are expected to assist. Badge work is found in each Handbook corresponding with each section. Handbook PDFs can be found under the "age groups" tab. Chipmunk and Otter parents must accompany with camping. We are a 100% volunteer run organization, which means that we cannot make scouting happen without family members involvement.</p>
+                </div>
+
+                <div class="info-card">
+                    <h4>How much are fees?</h4>
+                    <ul>
+                        <li>The 2025-26 dues for membership, camping and supplies) are $120 Chipmunk Otter-Timberwolf, $140 Pathfinder, $30 each sibling and Rover volunteer adults.</li>
+                        <li>For new members, there is an additional uniform fee of $45 Otter-Timberwolf and $68 Pathfinder-Rover.</li>
+                        <li>Pay if you go events (eg. kayaking, ziplining, etc.) will be extra based on pricing.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <section class="osg-section">
+                <div class="scout-logo">
+                    <img src="logo.png" alt="37th Loudoun Red Foxes Logo" style="width: 150px; height: auto;">
+                </div>
+                <div class="about-text">
+                    <h3>About Outdoor Service Guides</h3>
+                    <p>Outdoor Service Guides (OSG) is a non-profit organization based in the United States of America. We offer youth scouting programs and leadership enrichment opportunities for Everyone. Our goal is for everyone to experience the fun of scouting.</p>
+                    <p>OSG is not affiliated with either the Boy Scouts of America or the Girls Scouts of the USA. We are members of the World Federation of Independent Scouts (WFIS) and as such are not in competition with other American scouting associations; we are only their brothers and sisters in scouting.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Age Groups Page -->
+        <div id="age-groups" class="page">
+            <section class="hero">
+                <div class="hero-content">
+                    <h2>Age Groups & Programs</h2>
+                    <p>Discover the right program for your scout's age and interests.</p>
+                </div>
+            </section>
+
+            <div class="age-groups-grid">
+                <div class="age-group">
+                    <div class="age-group-badge">
+                        <img src="chipmunk-badge.png" alt="Chipmunk Badge" style="width: 120px; height: 120px; object-fit: contain;">
+                    </div>
+                    <h4>Chipmunk (ages 2-4)</h4>
+                    <p>This section is for the little brothers and sisters that are not of Otter age, but tag along on some of our activities.</p>
+                    <p>Parents are required to stay with chipmunks for all meetings and be responsible for their chipmunks at all times.</p>
+                    <div class="age-group-resource">RESOURCE: <a href="https://docs.guides4guides.org/Chipmunks/chipmunk-handbook+ENG+Spreads+for+printing.pdf" target="_blank">Chipmunk Handbook</a></div>
+                </div>
+
+                <div class="age-group">
+                    <div class="age-group-badge">
+                        <img src="otter-badge.png" alt="Otter Badge" style="width: 120px; height: 120px; object-fit: contain;">
+                    </div>
+                    <h4>Otter (ages 5-7)</h4>
+                    <p>Otters are introduced to the concepts of Scouting while going on adventures that teach useful outdoor and family skills. They participate in age-appropriate service to the community, learn to play safely together while working as a group, craft with their hands, and camp together with their families.</p>
+                    <div class="age-group-resource">RESOURCE: <a href="https://docs.guides4guides.org/Otters/field_book_otters_v2_revised.pdf" target="_blank">Field book for Otters</a></div>
+                </div>
+
+                <div class="age-group">
+                    <div class="age-group-badge">
+                        <img src="timberwolf-badge.png" alt="Timberwolf Badge" style="width: 120px; height: 120px; object-fit: contain;">
+                    </div>
+                    <h4>Timberwolf (ages 8-10)</h4>
+                    <p>The Timberwolf section is focused on hands-on outdoor skills, meaningful community service, and the strengthening of the Pack. The games and practical activities are focused on learning "by doing."</p>
+                    <div class="age-group-resource">RESOURCE: <a href="https://docs.guides4guides.org/Timberwolves/Handbook_TWv7_WEB.pdf" target="_blank">Timberwolf Handbook</a></div>
+                </div>
+
+                <div class="age-group">
+                    <div class="age-group-badge">
+                        <img src="pathfinder-badge.png" alt="Pathfinder Badge" style="width: 120px; height: 120px; object-fit: contain;">
+                    </div>
+                    <h4>Pathfinder (ages 11-17)</h4>
+                    <p>This is our most advanced scouting section that encourages leadership and perseverance. The badge work is advanced, but extremely fun! Not only are pathfinders advanced on their scouting journey, but they are also eligible for backpacking camping trips.</p>
+                    <div class="age-group-resource">RESOURCE: <a href="https://docs.guides4guides.org/Pathfinders/OSG+Pathfinder+Handbook.pdf" target="_blank">Pathfinder Handbook</a></div>
+                </div>
+
+                <div class="age-group">
+                    <div class="age-group-badge">
+                        <img src="rover-badge.png" alt="Rover Badge" style="width: 120px; height: 120px; object-fit: contain;">
+                    </div>
+                    <h4>Rover (ages 18+)</h4>
+                    <p>Rovers are the adult section of Outdoor Service Guides. There is no upper age limit for scouting with us, and adults can have fun scouting together and earning badges, too. All volunteer troop leaders are trained Rovers and we are always looking for new scouts to help out!</p>
+                    <div class="age-group-resource">RESOURCE: <a href="https://outdoorserviceguides.org/pdf/BPSA-US_Rover_Handbook.pdf" target="_blank">Rover Handbook</a></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Page -->
+        <div id="contact" class="page">
+            <section class="hero">
+                <div class="hero-content">
+                    <h2>Contact Us</h2>
+                    <p>Get in touch with our troop leaders and learn how to get involved.</p>
+                </div>
+            </section>
+
+            <div class="contact-section">
+                <h3>Get In Touch</h3>
+                <div class="contact-info">
+                    <strong>Email:</strong> 37redfoxes@gmail.com
+                </div>
+                <div class="contact-note">
+                    <strong>Please note:</strong> We are a 100% volunteer run organization, which means that we cannot make scouting happen without volunteer involvement. In order to provide the highest level of scouting programming, we must limit the number of youth scouts based on the number of scout leaders and volunteers. Please consider volunteering as a leader or admin.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Designed with 💚 for Scouting</p>
+    </footer>
+
+    <script>
+        // Navigation functionality
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update active nav link
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Close mobile menu if open
+            document.getElementById('navMenu').classList.remove('active');
+        }
+
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('navMenu');
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            
+            if (!navMenu.contains(event.target) && !menuBtn.contains(event.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
